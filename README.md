@@ -49,6 +49,8 @@ ie. one slot starting every 10 minute. Be carefull to start exactly at 0, 10, 20
 
 The processing is using a conda environment based on miniconda and pytroll/satpy=0.32.0 and python=3.9 with saving to geotiffs with tiling.
 
+We have several queues. In the test research-el7.q was used.
+
 ## Results
 
 Total 6396 MTG FCI netcdf test files where ingested into the processing. 6396 were received. 100% reception for this test starting 2021-12-06 12:34:00 completing 2021-12-07 14:34:00
