@@ -1,0 +1,44 @@
+@startuml okd-satellite-MTG-FCI-TEST-processing-ppi
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.2.0
+
+!include ICONURL/font-awesome/server.puml
+
+title System overview MTG FCI TEST processing on ppi and gridengine
+caption Updated %date()
+
+LAYOUT_TOP_DOWN()
+HIDE_STEREOTYPE()
+
+System_Boundary(simlulating_eumetcast_reception, "Simulation of Eumetcast Satellite/terrestrial reception,"){
+    Container(simulation, "Simulator", "simulating", "Script to simulate the reception of the MTG FCI uncompressed netcdf data.")
+}
+
+System_Boundary(c1, "Eumetcast data reception"){
+    Container(eum, "trollmoves server", "daemon", "inotified base file detection with scp to destinations based on subscription using posttroll")
+}
+
+System_Boundary(c2,"Satellite processing ppi"){
+    System_Boundary(a2, "ppi-adm-a2", "Collection. Submits jobs to gridengine"){
+        Container(move_it_client, "Move it client", "daemon", "Client receives data from server and publish the metadata as posttroll messages.")        
+        Container(segment_gatherer, "Segment gatherer", "daemon", "Segment gatherer collects metadata grouped by repeat_cycle_in_day, ie every 10th minute. When all segments are received publish dataset metadata as posttroll message.")        
+        Container(run_command, "run command", "daemon", "Trigger script submitting processing to gridengine.")        
+    }
+}
+
+System_Boundary(c3,"gridengine"){
+    Container(gridengine, "Grid engine", "", "Gidengine processing system")
+}
+
+System_Boundary(c4,"lustre"){
+    Container(lustre, "Lustre", "Lustre", "Lustre storage system")
+}
+
+Rel(simulation, eum, "scp")
+Rel(eum, lustre, "Transfere of received data")
+BiRel(eum, move_it_client,"postroll")
+Rel(move_it_client, segment_gatherer, "posttroll")
+Rel(segment_gatherer, run_command, "posttroll")
+Rel(run_command, gridengine, "Submission of jobs to gridengine")
+Rel(gridengine, lustre, "Write data directly to lustre")
+@enduml
