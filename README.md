@@ -81,3 +81,7 @@ Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz
 But the processing allocated 8 slots using 16 dask workers.
 
 Of 2184 expected geotiff products, 2170 products where produced ( due to one failed slot as explained above)
+
+## Conclusion
+
+Even if one slot failed, 9 slots used longer than 10 minutes and we might need more products in operation I'm confident that we will manage to process the MTG FCI data when we first reveive data in Q1/Q2 2023 using our PPI infrastructure.
