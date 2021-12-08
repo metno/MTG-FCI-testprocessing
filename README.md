@@ -87,3 +87,19 @@ Of 2184 expected geotiff products, 2170 products where produced ( due to one fai
 ## Conclusion
 
 Even if one slot failed, 9 slots used longer than 10 minutes and we might need more products in operation I'm confident that we will manage to process the MTG FCI data when we first reveive data in Q1/Q2 2023 using our PPI infrastructure.
+
+## Environment
+
+The following package version were used:
+```
+dask                      2021.11.2          pyhd8ed1ab_0    conda-forge
+dask-core                 2021.11.2          pyhd8ed1ab_0    conda-forge
+geotiff                   1.7.0                h90a4e78_5    conda-forge
+libgdal                   3.4.0               hbe510e8_10    conda-forge
+libtiff                   4.3.0                h6f004c6_2    conda-forge
+numpy                     1.21.4           py39hdbf815f_0    conda-forge
+pyresample                1.22.1           py39hde0f152_1    conda-forge
+rasterio                  1.2.10           py39he0fb565_3    conda-forge
+satpy                     0.32.0             pyhd8ed1ab_0    conda-forge
+xarray                    0.20.1             pyhd8ed1ab_0    conda-forge
+```
